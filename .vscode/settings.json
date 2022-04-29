@@ -1,0 +1,8 @@
+{
+  "editor.fontSize": 14,
+  "window.zoomLevel": 0,
+  "editor.tabSize": 2,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": false
+  }
+}
