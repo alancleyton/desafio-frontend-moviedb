@@ -1,0 +1,6 @@
+{
+  "src/**/*.{js,jsx}": [
+    "yarn lint:fix",
+    "yarn test:staged"
+  ]
+}
