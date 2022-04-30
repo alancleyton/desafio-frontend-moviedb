@@ -11,13 +11,14 @@
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
+    "styled-components": "^5.3.5",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test:staged": "yarn test --watchAll=false",
+    "test:staged": "yarn run test --passWithNoTests --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "eslint src/**",
     "lint:fix": "eslint 'src/**' --fix",

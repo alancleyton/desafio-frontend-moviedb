@@ -1,0 +1,11 @@
+export const white = '#ffffff';
+export const black = '#000000';
+export const primaryYellow = '#fada5e';
+export const secondaryYellow = '#fedf00';
+export const darkGray = '#121212';
+export const primaryGray = '#1f2022';
+export const secondaryGray = '#2a3439';
+export const primaryLightGray = '#dcdcdc';
+export const secondaryLightGray = '#eaeaea';
+export const primarySilverGray = '#a3a3a3';
+export const secondarySilverGray = '#868686';
