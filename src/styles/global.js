@@ -19,6 +19,7 @@ export default createGlobalStyle`
 
   body {
     min-height: 100vh;
+    height: 100%;
     background-color: ${secondaryGray};
     font-size: 16px;
     font-weight: 500;
@@ -29,6 +30,7 @@ export default createGlobalStyle`
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -webkit-text-size-adjust: 100%;
+    overflow: auto;
   }
 
   ol, ul {
