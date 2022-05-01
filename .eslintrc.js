@@ -44,5 +44,6 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'react/prop-types': 'off',
     'react/function-component-definition': 'off',
+    'no-unused-vars': 'off',
   },
 };
