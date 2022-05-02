@@ -22,9 +22,11 @@ const MovieDetails = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    Movies.getMovieDetails(id).then(response => {
-      setMovie(response.data);
-    });
+    Movies.getMovieDetails(id)
+      .then(response => {
+        setMovie(response.data);
+      })
+      .catch(err => Promise.resolve(err));
   }, [id]);
 
   return (
