@@ -7,16 +7,22 @@ import {
   Field,
   FieldDropDown,
   MoviesResult,
+  MovieNotFound,
 } from './SearchField.styles';
 import { Movies } from '../../services/Movies';
+import { Loading } from '../Loading';
 
 const formattedReleaseDate = date => date.substring(0, 4);
 
 const SearchField = () => {
   const [searchQuery, setSearchQuery] = useState(null);
   const [searchResult, setSearchResult] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [inputFocused, setInputFocused] = useState(false);
-  const updateSearchQuery = event => setSearchQuery(event.target.value);
+  const updateSearchQuery = event => {
+    setLoading(true);
+    setSearchQuery(event.target.value);
+  };
   const debouncedOnChange = debounce(updateSearchQuery, 500);
 
   const onInputFocus = () => setInputFocused(true);
@@ -24,9 +30,15 @@ const SearchField = () => {
 
   useEffect(() => {
     async function handleSearch() {
-      if (searchQuery) {
-        const response = await Movies.searchMovies(searchQuery);
-        setSearchResult(response.data.results);
+      try {
+        if (searchQuery) {
+          const response = await Movies.searchMovies(searchQuery);
+          setSearchResult(response.data.results);
+        }
+      } catch (err) {
+        Promise.resolve(err);
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -46,6 +58,25 @@ const SearchField = () => {
   const movieReleaseDate = movie =>
     movie.release_date ? formattedReleaseDate(movie.release_date) : ' ';
 
+  const renderSearchedMovies = result =>
+    result.length > 0 ? (
+      <MoviesResult>
+        {searchResult.map(movie => (
+          <li key={movie.id}>
+            <figure>{moviePoster(movie)}</figure>
+            <div>
+              <h6>{movie.title}</h6>
+              <span>{movieReleaseDate(movie)}</span>
+            </div>
+          </li>
+        ))}
+      </MoviesResult>
+    ) : (
+      <MovieNotFound>
+        <p>Nenhum Filme encontrado</p>
+      </MovieNotFound>
+    );
+
   return (
     <Container>
       <Field>
@@ -62,18 +93,11 @@ const SearchField = () => {
       </Field>
 
       <FieldDropDown isVisible={inputFocused && searchQuery}>
-        <MoviesResult>
-          {searchResult.length > 0 &&
-            searchResult.map(movie => (
-              <li key={movie.id}>
-                <figure>{moviePoster(movie)}</figure>
-                <div>
-                  <h6>{movie.title}</h6>
-                  <span>{movieReleaseDate(movie)}</span>
-                </div>
-              </li>
-            ))}
-        </MoviesResult>
+        {loading ? (
+          <Loading size="12px" style={{ marginTop: '80px' }} />
+        ) : (
+          renderSearchedMovies(searchResult)
+        )}
       </FieldDropDown>
     </Container>
   );
