@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import { Title, Container, MovieCard, MovieInfo } from './MovieList.styles';
 import { secondaryYellow } from '../../styles/colors';
 
+const movieIdHelper = () => Math.floor(Math.random() * 10) + 1;
+
 const MovieList = ({ movies }) => (
   <section>
     <Title>Mais Populares</Title>
     <Container>
       {movies.map(movie => (
-        <Link to={`/filme/${movie.id}`} key={movie.id}>
+        <Link to={`/filme/${movie.id}`} key={`${movie.id}${movieIdHelper}`}>
           <MovieCard>
             <figure>
               <img
