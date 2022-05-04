@@ -18,15 +18,25 @@ const SearchField = () => {
   const [searchQuery, setSearchQuery] = useState(null);
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [inputFocused, setInputFocused] = useState(false);
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const updateSearchQuery = event => {
     setLoading(true);
     setSearchQuery(event.target.value);
   };
   const debouncedOnChange = debounce(updateSearchQuery, 500);
 
-  const onInputFocus = () => setInputFocused(true);
-  const onInputBlur = () => setInputFocused(false);
+  const onInputFocus = () => {
+    setIsDropdownVisible(true);
+  };
+
+  const handleDropdownClickOut = () => {
+    const searchFieldDropdown = document.getElementById('SearchFieldDropdown');
+    document.addEventListener('mousedown', event => {
+      if (!searchFieldDropdown.contains(event.target)) {
+        setIsDropdownVisible(false);
+      }
+    });
+  };
 
   useEffect(() => {
     async function handleSearch() {
@@ -43,6 +53,7 @@ const SearchField = () => {
     }
 
     handleSearch();
+    handleDropdownClickOut();
   }, [searchQuery]);
 
   const moviePoster = movie =>
@@ -85,14 +96,16 @@ const SearchField = () => {
           placeholder="Pesquisar por filmes"
           onChange={debouncedOnChange}
           onFocus={onInputFocus}
-          onBlur={onInputBlur}
         />
         <button type="button">
           <FiSearch size={18} color="#ffffff" />
         </button>
       </Field>
 
-      <FieldDropDown isVisible={inputFocused && searchQuery}>
+      <FieldDropDown
+        id="SearchFieldDropdown"
+        isVisible={searchQuery && isDropdownVisible}
+      >
         {loading ? (
           <Loading size="12px" style={{ marginTop: '80px' }} />
         ) : (
