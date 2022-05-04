@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MdMovie } from 'react-icons/md';
 import { FiSearch } from 'react-icons/fi';
 import debounce from 'lodash.debounce';
@@ -22,8 +23,16 @@ const SearchField = () => {
   const updateSearchQuery = event => {
     setLoading(true);
     setSearchQuery(event.target.value);
+    setIsDropdownVisible(true);
   };
   const debouncedOnChange = debounce(updateSearchQuery, 500);
+
+  const navigate = useNavigate();
+
+  const pushToMovieDetails = movieId => {
+    setIsDropdownVisible(false);
+    navigate(`/filme/${movieId}`);
+  };
 
   const onInputFocus = () => {
     setIsDropdownVisible(true);
@@ -73,7 +82,11 @@ const SearchField = () => {
     result.length > 0 ? (
       <MoviesResult>
         {searchResult.map(movie => (
-          <li key={movie.id}>
+          <li
+            key={movie.id}
+            onClick={() => pushToMovieDetails(movie.id)}
+            aria-hidden="true"
+          >
             <figure>{moviePoster(movie)}</figure>
             <div>
               <h6>{movie.title}</h6>
