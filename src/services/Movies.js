@@ -3,7 +3,7 @@ import AXIOS from './axios';
 export class Movies {
   static getPopularMovies(page) {
     return AXIOS.get(
-      `/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=pt-BR&page=${page}`,
+      `/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=pt-BR&page=${page}&sort_by=release_date.asc`,
     );
   }
 
