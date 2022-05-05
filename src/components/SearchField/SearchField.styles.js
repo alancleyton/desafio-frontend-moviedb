@@ -39,25 +39,6 @@ export const Field = styled.div`
     background-color: #141414;
     transition: all 0.2s ease;
   }
-
-  button {
-    display: inline-flex;
-    align-items: center;
-    appearance: button;
-    margin: 0;
-    padding: 0.5rem;
-    vertical-align: middle;
-    cursor: pointer;
-    background-color: ${secondaryGray};
-    border: 2px solid ${secondaryGray};
-    border-radius: 0 5px 5px 0;
-    transition: all 0.2s ease;
-  }
-
-  button:hover,
-  button:focus {
-    filter: brightness(150%);
-  }
 `;
 
 export const FieldDropDown = styled.div`

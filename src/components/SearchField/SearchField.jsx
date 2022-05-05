@@ -110,9 +110,6 @@ const SearchField = () => {
           onChange={debouncedOnChange}
           onFocus={onInputFocus}
         />
-        <button type="button">
-          <FiSearch size={18} color="#ffffff" />
-        </button>
       </Field>
 
       <FieldDropDown
