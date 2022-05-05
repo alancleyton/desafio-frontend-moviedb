@@ -68,7 +68,7 @@ const SearchField = () => {
   const moviePoster = movie =>
     movie.poster_path ? (
       <img
-        src={`https://www.themoviedb.org/t/p/original/${movie.poster_path}`}
+        src={`https://www.themoviedb.org/t/p/w92/${movie.poster_path}`}
         alt={movie.title}
       />
     ) : (

@@ -33,13 +33,13 @@ const MovieDetails = () => {
     <div>
       {movie.id && (
         <Backdrop
-          url={`https://www.themoviedb.org/t/p/original/${movie.backdrop_path}`}
+          url={`https://www.themoviedb.org/t/p/w1280/${movie.backdrop_path}`}
         >
           <Container>
             <DetailsContainer>
               <MoviePoster>
                 <img
-                  src={`https://www.themoviedb.org/t/p/original/${movie.poster_path}`}
+                  src={`https://www.themoviedb.org/t/p/w500/${movie.poster_path}`}
                   alt={movie.title}
                 />
               </MoviePoster>
