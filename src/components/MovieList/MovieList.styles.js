@@ -50,6 +50,11 @@ export const MovieCard = styled.article`
       }
     }
   }
+
+  @media (max-width: 576px) {
+    width: 140px;
+    height: 300px;
+  }
 `;
 
 export const MovieInfo = styled.div`
@@ -76,5 +81,8 @@ export const MovieInfo = styled.div`
     font-weight: 500;
     color: ${white};
     line-height: 1;
+    @media (max-width: 576px) {
+      font-size: 12px;
+    }
   }
 `;
